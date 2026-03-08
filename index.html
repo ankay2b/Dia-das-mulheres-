@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Para Ana ❤️</title>
+
+<style>
+body{
+  margin:0;
+  background:black;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  overflow:hidden;
+  color:red;
+}
+
+/* TEXTO */
+#mensagem{
+  font-size:55px;
+  margin-top:120px;
+  padding:20px;
+  text-shadow:0 0 20px red;
+}
+
+/* BOTÃO */
+button{
+  margin-top:40px;
+  padding:18px 40px;
+  font-size:22px;
+  background:red;
+  color:white;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* CORAÇÃO SURPRESA */
+#coracao{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:160px;
+  animation:pulsar 1s infinite;
+}
+
+/* NOME */
+#nome{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:40px;
+  color:white;
+}
+
+/* PULSAR */
+@keyframes pulsar{
+  0%{transform:translate(-50%,-50%) scale(1);}
+  50%{transform:translate(-50%,-50%) scale(1.2);}
+  100%{transform:translate(-50%,-50%) scale(1);}
+}
+
+/* ITENS CAINDO */
+.fall{
+  position:fixed;
+  top:-50px;
+  font-size:28px;
+  animation:cair linear infinite;
+}
+
+@keyframes cair{
+  to{ transform:translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="mensagem"></div>
+
+<button onclick="surpresa()">Abrir surpresa ❤️</button>
+
+<div id="coracao">❤️</div>
+<div id="nome">Ana</div>
+
+<script>
+
+/* TEXTO LETRA POR LETRA */
+const texto = `Feliz dia das mulheres meu amor ❤️
+Você é incrível.
+Saiba que você é muito especial para mim,
+e que sempre vou fazer de tudo por você.
+Um beijo princesa.`;
+
+let i = 0;
+function escrever(){
+  if(i < texto.length){
+    document.getElementById("mensagem").innerHTML += texto.charAt(i) === "\n" ? "<br>" : texto.charAt(i);
+    i++;
+    setTimeout(escrever, 60);
+  }
+}
+escrever();
+
+/* SURPRESA */
+function surpresa(){
+  document.getElementById("coracao").style.display="block";
+  document.getElementById("nome").style.display="block";
+}
+
+/* CORAÇÕES E ROSAS CAINDO */
+function cairItens(){
+  const item=document.createElement("div");
+  item.classList.add("fall");
+
+  const icones=["❤️","🌹"];
+  item.innerHTML=icones[Math.floor(Math.random()*icones.length)];
+
+  item.style.left=Math.random()*100+"vw";
+  item.style.animationDuration=(Math.random()*3+2)+"s";
+
+  document.body.appendChild(item);
+
+  setTimeout(()=>{ item.remove(); },5000);
+}
+
+setInterval(cairItens,300);
+
+</script>
+
+</body>
+</html>
